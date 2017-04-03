@@ -1,0 +1,20 @@
+<div class="container">
+  <h2>My Info</h2>
+
+
+  <div ng-if="!vm.info">Not Signed Up Yet! <a ui-sref="public.signup">Sign up Now!</a></div>
+
+  <div ng-if="vm.info">
+    <div>
+      First Name: {{ vm.info.firstName }}<br/>
+      Last Name: {{ vm.info.lastName }} <br/>
+      Email: {{ vm.info.email }} <br/>
+      Mobile: {{ vm.info.mobile }}<br/>
+    </div>
+    <div>
+      <h2>Favorite</h2>
+      <menu-item menu-item="vm.menuItem"></ menu-item>
+    </div>
+  </div>
+
+</div>
