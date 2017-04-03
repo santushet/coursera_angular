@@ -11,8 +11,9 @@ function MyinfoController(MenuService, info) {
 
   if(info){
     vm.info = info;
-    MenuService.getMenuItems(info.favorite)
+    MenuService.getMenuItem(info.favorite)
     .then(function (response) {
+      console.log(response);
       vm.menuItem = response;
     })
     .catch(function (response) {
