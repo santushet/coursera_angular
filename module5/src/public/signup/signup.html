@@ -1,49 +1,82 @@
 <div class="container">
   <h2 class="text-center">Sign Up</h2>
 
-  <div ng-if="vm.submitted">
-    Your information has been saved
-  </div>
-
   <form name="signUpForm" novalidate>
     <div class="form-group">
       <label for="firstName">First Name</label>
       <input type="text" class="form-control" name="firstName" placeholder="First name" required ng-model="vm.info.firstName">
-      <span ng-if="signUpForm.firstName.$invalid && signUpForm.firstName.$touched">
-        First name is required
-      </span>
+
+      <div ng-show="signUpForm.firstName.$dirty && signUpForm.firstName.$invalid">
+                            <p class="help-block"
+                               ng-show="signUpForm.firstName.$error.required">
+                                Your firstName is required.
+                            </p>
+                        </div>
     </div>
 
     <div class="form-group">
       <label for="lastName">Last name</label>
       <input type="text" class="form-control" name="lastName" placeholder="Last name" required ng-model="vm.info.lastName">
-      <span ng-if="signUpForm.lastName.$invalid && signUpForm.lastName.$touched">
-        Last name is required
-      </span>
+      <div ng-show="signUpForm.lastName.$dirty && signUpForm.lastName.$invalid">
+                            <p class="help-block"
+                               ng-show="signUpForm.lastName.$error.required">
+                                Your lastName is required.
+                            </p>
+                        </div>
     </div>
 
     <div class="form-group">
       <label for="email">Email address</label>
       <input type="email" class="form-control" name="email" placeholder="Email address" required ng-model="vm.info.email">
-      <span ng-if="signUpForm.email.$invalid && signUpForm.email.$touched">
-        Your e-mail is invalid.
-      </span>
+
+      <div ng-show="signUpForm.email.$dirty && signUpForm.email.$invalid">
+                        <p class="help-block"
+                           ng-show="signUpForm.email.$error.required">
+                            Your e-mail is required.
+                        </p>
+                        <p class="help-block"
+                           ng-show="signUpForm.email.$error.email">
+                            Your e-mail is invalid.
+                        </p>
+                      </div>
     </div>
 
     <div class="form-group">
       <label for="mobile">Mobile</label>
       <input type="text" class="form-control" name="mobile" placeholder="Mobile number"
         ng-model="vm.info.mobile" ng-minlength=10 ng-maxlength=10>
-      <span ng-if="signUpForm.mobile.$invalid && signUpForm.mobile.$touched">
-        Your mobile number is invalid.
-      </span>
+
+      <div ng-show="signUpForm.mobile.$dirty && signUpForm.mobile.$invalid">
+                        <p class="help-block"
+                           ng-show="signUpForm.mobile.$error.required">
+                            Your mobile number is required.
+                        </p>
+                        <p class="help-block"
+                           ng-show="signUpForm.mobile.$error.mobile">
+                            Your mobile number is invalid.
+                        </p>
+
+                    </div>
     </div>
     <div class="form-group">
       <label for="favorite">Favorite dish</label>
-      <input type="text" class="form-control" name="favorite" placeholder="Favorite dish" ng-model="vm.info.favorite" ng-blur="vm.validateFavorite()">
-      <span ng-if="vm.invalidFavorite">
-        No such menu number exists
-      </span>
+      <input type="text" class="form-control" name="favorite" placeholder="Favorite dish" ng-model="vm.info.favorite" required>
+      <div ng-show="signUpForm.favorite.$dirty && signUpForm.favorite.$invalid">
+                            <p class="help-block"
+                               ng-show="signUpForm.favorite.$error.required">
+                                Your favorite is required.
+                            </p>
+                        </div>
+    </div>
+
+    <div class="form-group">
+      <div class="alert alert-danger" role="alert" ng-if="vm.error">
+        Invalid dish.
+      </div>
+      <div class="alert alert-success" role="alert" ng-if="vm.success">
+        Your information has been saved.
+      </div>
+      <br>
     </div>
     <button type="submit" class="btn btn-default" ng-disabled="signUpForm.$invalid" ng-click="vm.submit()">Submit</button>
   </form>

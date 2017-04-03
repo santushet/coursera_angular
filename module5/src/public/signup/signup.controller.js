@@ -12,25 +12,18 @@ function SignupController(MenuService, MyInfoService) {
   vm.info ={};
 
   vm.submit = function () {
-    MenuService.getMenuItems(vm.info.favorite)
+    MenuService.getMenuItem(vm.info.favorite)
       .then(function (response) {
-        vm.invalidFavorite = false;
-        vm.submitted = true;
         MyInfoService.setInfo(vm.info);
+        vm.success = true;
+        vm.error =false;
+
       })
       .catch(function () {
-        vm.invalidFavorite = true;
+        vm.error = true;
+        vm.success =false;
       })
   }
 
-  vm.validateFavorite = function () {
-    MenuService.getMenuItems(vm.info.favorite)
-      .then(function () {
-        vm.invalidFavorite = false;
-      })
-      .catch(function () {
-        vm.invalidFavorite = true;
-      })
-  }
 }
 }());
